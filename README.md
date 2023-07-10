@@ -59,7 +59,7 @@ npm start
 
 ```
 
-5. Access the application at [http://localhost:3000](http://localhost:3000).
+5. You can make requests at [http://localhost:3000](http://localhost/:3000).
 
 ## API Documentation
 
