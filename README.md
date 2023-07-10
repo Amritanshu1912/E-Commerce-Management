@@ -8,7 +8,7 @@ This is an order management system built using Node.js, Express, and a database 
 -   Order management: CRUD operations for orders with order number, products, and quantities.
 -   Inventory management: Track product inventory levels and update quantities when orders are placed or fulfilled via different authorised roles.
 
-## technologies Learned
+## Technologies Learned
 
 During the development of this project, I have learned and implemented the following features:
 
@@ -36,19 +36,20 @@ The project utilizes the following backend technologies and libraries:
 1. Clone the repository:
 
 ```console
-git clone https://github.com/your-username/order-management.git
+git clone https://github.com/Amritanshu1912/E-Commerce-Management.git
 ```
 
 2. Install the dependencies:
 
 ```console
-cd order-management npm install
+cd E-Commerce-Management npm install
 
 ```
 
 3. Set up the database:
 
 -   Create a new database for the project.
+-   You can use the seeder file in the root directory to seed tables with dummy data
 -   Update the database configuration in `config/database.js`.
 
 4. Start the server:
