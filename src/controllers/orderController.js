@@ -1,4 +1,4 @@
-const orders = require("../models/orders.js");
+const orders = require("../../models/orders.js");
 const logger = require("../utils/logger.js");
 
 // Get a list of all orders

@@ -1,5 +1,5 @@
 const { Sequelize } = require("sequelize");
-const logger = require("../utils/logger");
+const logger = require("../src/utils/logger");
 require("dotenv").config();
 
 // Create a Sequelize instance and connect to the database

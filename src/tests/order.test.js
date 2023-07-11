@@ -1,16 +1,8 @@
 /* eslint-disable no-undef */
 const request = require("supertest");
-const app = require("../config/app");
-
-//to do : replace authorization with
+const { app, server } = require("../app");
 
 describe("Order APIs", () => {
-	let server;
-
-	beforeAll(() => {
-		server = app.listen(3000);
-	});
-
 	afterAll((done) => {
 		server.close(done);
 	});

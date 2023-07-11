@@ -1,8 +1,8 @@
 /* errorMiddleware.js
  Implement middleware functions to catch and handle errors 
  during the request-response cycle. This middleware can format 
- and respond with appropriate error messages to provide 
- meaningful feedback to clients.
+ and respond with appropriate error messages to provide  
+ meaningful feedback to clients. 
 */
 const logger = require("../utils/logger.js");
 
