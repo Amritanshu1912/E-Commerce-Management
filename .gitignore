@@ -1,5 +1,5 @@
-BUSI_LOGIC/
-node_modules/
 .vscode/
+BUSI_LOGIC/
 *.log
+node_modules/
 .eslintrc.json
