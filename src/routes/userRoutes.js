@@ -12,7 +12,7 @@ const {
 	validateCreateUser,
 	validateUpdateUser,
 	handleValidationErrors,
-} = require("../validators/userValidators.js");
+} = require("../validators/userValidator.js");
 const { authenticate, authorize } = require("../middlewares/authMiddleware.js");
 
 const allowedRoles = ["admin", "support"];
