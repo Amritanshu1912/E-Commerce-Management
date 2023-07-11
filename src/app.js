@@ -1,8 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const helmet = require("helmet");
 const routes = require("./routes/index.js");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./config/swagger");
 const errorHandler = require("./middlewares/errorHandler.js");
-require("dotenv").config();
 
 const app = express();
 
@@ -10,11 +12,13 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 
-// Routes
-app.use("/", routes);
-
 // Error handling middleware
 app.use(errorHandler);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Routes
+app.use("/", routes);
 
 // Start the server
 const port = process.env.APP_PORT || 3000; // Set the port

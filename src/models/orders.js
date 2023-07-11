@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
+const sequelize = require("../../config/database");
 const users = require("./users"); // Assuming you have a Customer model defined
 const products = require("./products"); // Assuming you have a Product model defined
 
