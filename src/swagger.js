@@ -11,9 +11,20 @@ const options = {
 				url: "https://github.com/E-Commerce-API/E-Commerce-API",
 				email: "amritanshusingh3@gmail.com",
 			},
-			servers: {
-				url: "https://localhost:3000/",
-				description: "Local server",
+			servers: [
+				{
+					url: "https://localhost:3000/",
+					description: "Local server",
+				},
+			],
+			components: {
+				securitySchemes: {
+					bearerAuth: {
+						type: "http",
+						scheme: "bearer",
+						bearerFormat: "JWT",
+					},
+				},
 			},
 			version: "1.0.0",
 		},
