@@ -4,32 +4,32 @@ This is an order management system built using Node.js, Express, and a database 
 
 ## Features
 
--   User authentication: Register, login, and logout functionality with password encryption and JWT token-based authentication.
--   Order management: CRUD operations for orders with order number, products, and quantities.
--   Inventory management: Track product inventory levels and update quantities when orders are placed or fulfilled via different authorised roles.
+- User authentication: Register, login, and logout functionality with password encryption and JWT token-based authentication.
+- Order management: CRUD operations for orders with order number, products, and quantities.
+- Inventory management: Track product inventory levels and update quantities when orders are placed or fulfilled via different authorised roles.
 
 ## Technologies Learned
 
 During the development of this project, I have learned and implemented the following features:
 
--   Unit and integration tests using Jest and supertest.
--   Dedicated loggers for logging application events and errors using Winston.
--   User authentication and authorization using JWT tokens.
--   Utilization of Node.js libraries like bcrypt, express-validator, helmet, jsonwebtoken, winston, etc.
+- Unit and integration tests using Jest and supertest.
+- Dedicated loggers for logging application events and errors using Winston.
+- User authentication and authorization using JWT tokens.
+- Utilization of Node.js libraries like bcrypt, express-validator, helmet, jsonwebtoken, winston, etc.
 
 ## Tech Stack
 
 The project utilizes the following backend technologies and libraries:
 
--   Node.js
--   Express
--   PostgreSQL
--   Sequelize
--   bcrypt
--   jsonwebtoken
--   winston
--   jest
--   supertest
+- Node.js
+- Express
+- PostgreSQL
+- Sequelize
+- bcrypt
+- jsonwebtoken
+- winston
+- jest
+- supertest
 
 ## Installation
 
@@ -48,9 +48,9 @@ cd E-Commerce-Management npm install
 
 3. Set up the database:
 
--   Create a new database for the project.
--   You can use the seeder file in the root directory to seed tables with dummy data
--   Update the database configuration in `config/database.js`.
+- Create a new database for the project.
+- You can use the seeder file in the root directory to seed tables with dummy data
+- Update the database configuration in `config/database.js`.
 
 4. Start the server:
 
@@ -63,8 +63,8 @@ npm start
 
 ## API Documentation
 
--   The API documentation for this project is automatically generated using Swagger/OpenAPI.
--   Access the API documentation at [http://localhost:3000/docs](http://localhost:3000/docs).
+- The API documentation for this project is automatically generated using Swagger/OpenAPI.
+- Access the API documentation at [http://localhost:3000/docs](http://localhost:3000/docs).
 
 ### API Endpoints
 
