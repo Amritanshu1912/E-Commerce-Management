@@ -1,66 +1,79 @@
-/*
-This file will contain the middleware functions that will be used 
-to protect the routes that require authentication and authorization. 
-It should handle the following functions:
-
-authenticate: This function should check if the incoming request 
-has a valid JWT token and add the authenticated user's details 
-to the request object for further processing.
-
-authorize: This function should be used to check if the authenticated 
-user has the necessary permissions to access a particular route.
-*/
+/* eslint-disable indent */
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const logger = require("../utils/logger");
 
-const authenticate = (req, res, next) => {
-	const authHeader = req.headers["authorization"];
-	const token = authHeader && authHeader.split(" ")[1];
+/**
+ * Middleware to authenticate users based on JWT tokens.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @param {function} next - Express next middleware function.
+ * @returns {Promise<void>} - Resolves if authentication is successful, otherwise sends a 401 Unauthorized response.
+ */
+const authenticate = async (req, res, next) => {
+  try {
+    // Extract JWT token from the Authorization header
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
 
-	if (!token) {
-		return res
-			.status(401)
-			.json({ message: "Unauthorized: No token provided" });
-	}
+    // If no token is provided, send a 401 Unauthorized response
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: No token provided" });
+    }
 
-	jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
-		if (error) {
-			logger.error(error);
-			if (error instanceof jwt.TokenExpiredError) {
-				return res
-					.status(401)
-					.json({ message: "Unauthorized: Token expired" });
-			} else if (error instanceof jwt.JsonWebTokenError) {
-				return res
-					.status(401)
-					.json({ message: "Unauthorized: Invalid token" });
-			} else {
-				return res
-					.status(401)
-					.json({ message: "Unauthorized: Token error" });
-			}
-		} else {
-			req.user = decoded.user;
-			next();
-		}
-	});
+    // Verify the token using the JWT_SECRET
+    const decoded = await new Promise((resolve, reject) => {
+      jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
+        if (error) {
+          logger.error(error);
+
+          // Handle different JWT errors and reject accordingly
+          if (error instanceof jwt.TokenExpiredError) {
+            reject("Token expired");
+          } else if (error instanceof jwt.JsonWebTokenError) {
+            reject("Invalid token");
+          } else {
+            reject("Token error");
+          }
+        } else {
+          resolve(decoded);
+        }
+      });
+    });
+
+    // Attach the decoded user information to the request object for further processing
+    req.user = decoded.user;
+    next();
+  } catch (error) {
+    // Send a 401 Unauthorized response with an error message
+    return res
+      .status(401)
+      .json({ message: `Unauthorized: ${error.message || error}` });
+  }
 };
 
-// Authorize Middleware
+/**
+ * Middleware to authorize users based on their roles.
+ * @param {string[]} roles - An array of roles that are allowed to access the route.
+ * @returns {function} - Express middleware function.
+ */
 const authorize = (roles) => {
-	return (req, res, next) => {
-		try {
-			if (req.user && req.user.role && !roles.includes(req.user.role)) {
-				return res
-					.status(403)
-					.json({ message: "Forbidden: Access denied" });
-			}
-			next();
-		} catch (error) {
-			return res.status(500).json({ message: "Internal Server Error" });
-		}
-	};
+  return (req, res, next) => {
+    try {
+      // Check if the user has the necessary role to access the route
+      if (req.user && req.user.role && !roles.includes(req.user.role)) {
+        return res.status(403).json({ message: "Forbidden: Access denied" });
+      }
+
+      // If authorized, proceed to the next middleware or route handler
+      next();
+    } catch (error) {
+      // Send a 500 Internal Server Error response in case of an unexpected error
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  };
 };
 
 module.exports = { authenticate, authorize };
